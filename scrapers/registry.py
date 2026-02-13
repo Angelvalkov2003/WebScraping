@@ -2,12 +2,13 @@
 from typing import List, Optional
 
 from .base import BaseScraper
+from .nova_bg import NovaBgScraper
 from .twelve_punto import TwelvePuntoScraper
 
 # All available scrapers (add new ones here)
 SCRAPERS: List[BaseScraper] = [
     TwelvePuntoScraper(),
-    # Future: OtherScraper(),
+    NovaBgScraper(),
 ]
 
 
