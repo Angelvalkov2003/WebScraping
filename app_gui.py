@@ -1,7 +1,4 @@
-"""
-GUI за уеб скрейпинг на новини.
-Избор на тип сайт (12 Punto и др.), въвеждане на линк, извличане на заглавие, снимка и текст.
-"""
+"""GUI за уеб скрейпинг на новини – избор на сайт, линк, извличане заглавие/снимка/текст."""
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext
 from typing import Optional, Union
@@ -9,7 +6,6 @@ from typing import Optional, Union
 from scrapers.base import ArticleData
 from scrapers.registry import get_available_sites, get_scraper_by_name, get_scraper_for_url
 
-# Предварително записани линкове по тип сайт (за падащото меню „Линк“)
 PRESET_LINKS: dict[str, list[str]] = {
     "12 Punto": [
         "https://12punto.com.tr/gundem/chpden-meclis-baskani-kurtulmusun-anayasaya-aykiri-tesebbus-yorumuna-tepki-ilgileniyorsa-atalay-kararini-uygulasin-111020",
@@ -29,14 +25,9 @@ PRESET_LINKS: dict[str, list[str]] = {
 
 
 def _bind_paste_copy(widget: Union[tk.Entry, tk.Text]):
-    """Осигурява работещ Paste (Ctrl+V) и Copy (Ctrl+C) на Windows."""
     def on_paste(event):
         try:
-            text = widget.clipboard_get()
-            if isinstance(widget, tk.Text):
-                widget.insert(tk.INSERT, text)
-            else:
-                widget.insert(tk.INSERT, text)
+            widget.insert(tk.INSERT, widget.clipboard_get())
             return "break"
         except tk.TclError:
             pass
@@ -90,7 +81,6 @@ def _bind_paste_copy(widget: Union[tk.Entry, tk.Text]):
 
 
 def run_scrape(url: str, site_name: Optional[str]) -> ArticleData:
-    """Run scraper and return article data."""
     if site_name:
         scraper = get_scraper_by_name(site_name)
         if not scraper:
@@ -188,7 +178,6 @@ class ScraperApp:
         _bind_paste_copy(self.text_widget)
 
     def _copy_field(self, get_text):
-        """Копира в клипборда текста от полето (get_text е функция без аргументи, връща str)."""
         text = (get_text() or "").strip()
         if not text:
             messagebox.showinfo("Копиране", "Няма текст за копиране.")
@@ -198,7 +187,6 @@ class ScraperApp:
         messagebox.showinfo("Копиране", "Текстът е копиран в клипборда.")
 
     def _copy_text_field(self):
-        """Копира целия текст от полето за текст на новината."""
         text = self.text_widget.get("1.0", tk.END).strip()
         if not text:
             messagebox.showinfo("Копиране", "Няма текст за копиране.")
@@ -208,16 +196,14 @@ class ScraperApp:
         messagebox.showinfo("Копиране", "Текстът е копиран в клипборда.")
 
     def _on_site_changed(self, event=None):
-        """При смяна на тип сайт обновява списъка с линкове в падащото меню."""
         self._update_url_dropdown()
 
     def _update_url_dropdown(self):
-        """Попълва падащото меню „Линк“ с предзаписани линкове за избрания сайт."""
         site = self.site_var.get().strip()
         links = PRESET_LINKS.get(site, [])
-        self.url_combo["values"] = tuple(links)  # явно tuple за по-добра съвместимост с ttk.Combobox
+        self.url_combo["values"] = tuple(links)
         if links:
-            self.url_var.set(links[0])  # винаги показвай първия линк при смяна на сайт
+            self.url_var.set(links[0])
 
     def _on_scrape(self):
         url = self.url_var.get().strip()

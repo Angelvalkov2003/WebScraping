@@ -40,7 +40,6 @@ class TwelvePuntoScraper(BaseScraper):
         )
 
     def _extract_title(self, soup: BeautifulSoup) -> Optional[str]:
-        # og:title or h1
         meta = soup.find("meta", property="og:title")
         if meta and meta.get("content"):
             return meta["content"].strip()
@@ -53,7 +52,6 @@ class TwelvePuntoScraper(BaseScraper):
         return None
 
     def _extract_image(self, soup: BeautifulSoup, base_url: str) -> Optional[str]:
-        # og:image first (main article image)
         meta = soup.find("meta", property="og:image")
         if meta and meta.get("content"):
             url = meta["content"].strip()
@@ -62,7 +60,6 @@ class TwelvePuntoScraper(BaseScraper):
             elif url.startswith("/"):
                 url = "https://12punto.com.tr" + url
             return url
-        # Fallback: first article image
         article = soup.find("article") or soup.find("div", class_=re.compile(r"article|content|post", re.I))
         if article:
             img = article.find("img", src=True)
@@ -76,7 +73,6 @@ class TwelvePuntoScraper(BaseScraper):
         return None
 
     def _extract_text(self, soup: BeautifulSoup) -> Optional[str]:
-        # Article body: try CSS selectors first
         selectors = [
             "article .content",
             "article .article-body",
@@ -103,7 +99,6 @@ class TwelvePuntoScraper(BaseScraper):
             if len(text) > 100:
                 return text
 
-        # Last resort: all p in main
         main = soup.find("main") or soup.find("div", id=re.compile(r"content|main", re.I))
         if main:
             paragraphs = main.find_all("p")
