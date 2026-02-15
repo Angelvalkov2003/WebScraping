@@ -9,7 +9,7 @@ from .base import ArticleData, BaseScraper
 
 
 class NovaBgScraper(BaseScraper):
-    """Scraper for nova.bg (Нова телевизия)."""
+
 
     name = "Nova TV"
     domain = "nova.bg"

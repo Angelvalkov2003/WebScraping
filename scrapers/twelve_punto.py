@@ -9,7 +9,6 @@ from .base import ArticleData, BaseScraper
 
 
 class TwelvePuntoScraper(BaseScraper):
-    """Scraper for 12punto.com.tr."""
 
     name = "12 Punto"
     domain = "12punto.com.tr"

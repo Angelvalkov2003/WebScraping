@@ -12,6 +12,7 @@ PRESET_LINKS: dict[str, list[str]] = {
         "https://12punto.com.tr/gundem/bogazici-universitesinde-yurt-acilisi-sebebiyle-kampuse-giris-yasaklandi-cumhurbaskani-erdogan-gelecek-iddiasi-111016",
         "https://12punto.com.tr/gundem/osman-gokcekten-iddia-ozgur-ozel-kursuyu-isgal-edin-dedi-111034",
         "https://12punto.com.tr/ekonomi/istanbulda-toplu-tasimaya-zam-16-subattan-itibaren-111011",
+        "https://12punto.com.tr/ekonomi/tmsfnin-el-koydugu-banka-satiliyor-tarih-belli-oldu-111198",
     ],
     "Nova TV": [
         "https://nova.bg/news/view/2026/02/13/527075/%D1%81%D1%8A%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5%D1%82%D0%BE-%D0%BD%D0%B0-15-%D0%B3%D0%BE%D0%B4%D0%B8%D1%88%D0%BD%D0%BE%D1%82%D0%BE-%D0%BC%D0%BE%D0%BC%D0%B8%D1%87%D0%B5-%D0%B2-%D0%BF%D0%B8%D1%80%D0%BE%D0%B3%D0%BE%D0%B2-%D0%B5-%D1%81%D1%82%D0%B0%D0%B1%D0%B8%D0%BB%D0%B8%D0%B7%D0%B8%D1%80%D0%B0%D0%BD%D0%BE-%D0%BD%D0%BE-%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B0-%D1%82%D0%B5%D0%B6%D0%BA%D0%BE/",
